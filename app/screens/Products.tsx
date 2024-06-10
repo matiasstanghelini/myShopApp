@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { fetchProducts } from '../api/api';
-import { ProductsPageProps } from '@/navigation/ProductsStack';
+import { ProductsPageProps } from '../navigation/ProductsStack';
 
 const Products = ({ navigation }: ProductsPageProps) => {
   const [products, setProducts] = useState([]);
