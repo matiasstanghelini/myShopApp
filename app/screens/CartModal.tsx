@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, ScrollView, Platform, Keyboard, BackHandler } from 'react-native';
+import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, ScrollView, Platform, Keyboard, ActivityIndicator } from 'react-native';
 import useCartStore from '../state/cartStore';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Order, createOrder } from '../api/api';
 import { useNavigation } from '@react-navigation/native';
-import { StackNavigation } from '@/navigation/ProductsStack';
+import { StackNavigation } from '../navigation/ProductsStack';
 import ConfettiCannon from 'react-native-confetti-cannon';
 
 const CartScreen = () => {
@@ -20,17 +20,6 @@ const CartScreen = () => {
   const [order, setOrder] = useState<Order | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const navigation = useNavigation<StackNavigation>();
-
-  useEffect(() => {
-    const backAction = () => {
-      navigation.goBack();
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
-
-    return () => backHandler.remove();
-  }, []);
 
   const onSubmitOrder = async () => {
     setSubmitting(true);
@@ -58,9 +47,6 @@ const CartScreen = () => {
       )}
       {!order && (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={65}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={{ position: 'absolute', top: 20, left: 20 }}>
-            <Ionicons name="arrow-back" size={24} color={'#000'} />
-          </TouchableOpacity>
           <Text style={styles.cartTitle}>Your Cart</Text>
           {products.length === 0 && <Text style={{ textAlign: 'center' }}>Your cart is empty!</Text>}
           <FlatList
@@ -89,7 +75,10 @@ const CartScreen = () => {
 
           <TextInput style={styles.emailInput} placeholder="Enter your email" onChangeText={setEmail} />
           <TouchableOpacity style={[styles.submitButton, email === '' ? styles.inactive : null]} onPress={onSubmitOrder} disabled={email === '' || submitting}>
-            <Text style={styles.submitButtonText}>{submitting ? 'Creating Order...' : 'Submit Order'}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={styles.submitButtonText}>{submitting ? 'Creating Order' : 'Submit Order'}</Text>
+              {submitting && <ActivityIndicator size="small" color="#fff" style={{ marginLeft: 10 }} />}
+            </View>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       )}
@@ -172,3 +161,4 @@ const styles = StyleSheet.create({
 });
 
 export default CartScreen;
+
