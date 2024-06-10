@@ -52,11 +52,11 @@ const ProductDetails = ({ route }: ProductDetailsPageProps) => {
           <Text style={styles.productPrice}>Price: ${product.product_price}</Text>
           <View style={styles.buttonsContainer}>
             <TouchableOpacity style={styles.button} onPress={() => reduceProduct(product)}>
-              <Ionicons name="remove" size={24} color={'#1FE687'} />
+              <Ionicons name="remove" size={30} />
             </TouchableOpacity>
             <Text style={styles.quantity}>{count}</Text>
             <TouchableOpacity style={styles.button} onPress={() => addProduct(product)}>
-              <Ionicons name="add" size={24} />
+              <Ionicons name="add" size={30} />
             </TouchableOpacity>
           </View>
         </>
@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
   },
   button: {
     paddingVertical: 12,
-    borderRadius: 8,
+    borderRadius: 15,
     backgroundColor: '#fff',
     alignItems: 'center',
     flex: 1,
-    borderColor: '#1FE687',
-    borderWidth: 2,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   quantity: {
     fontSize: 20,
