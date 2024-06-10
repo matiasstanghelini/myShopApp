@@ -12,7 +12,10 @@
     },
     "preview": {
       "channel": "staging",
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://api-prueba-01-tau.vercel.app"
+      }
     }
   },
   "submit": {
