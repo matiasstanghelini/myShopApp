@@ -55,7 +55,7 @@ const ProductsStackNav = () => {
         headerTintColor: '#fff',
         headerRight: () => <CartButton />,
       }}>
-      <ProductsStack.Screen name="Products" component={Products} options={{ headerTitle: 'Shop App' }} />
+      <ProductsStack.Screen name="Products" component={Products} options={{ headerTitle: 'Shop App .', headerTitleStyle: { fontWeight: 'bold' } }} />
       <ProductsStack.Screen name="ProductDetails" component={ProductDetails} options={{ headerTitle: '' }} />
       <ProductsStack.Screen name="CartModal" component={CartModal} options={{ headerShown: false, presentation: 'modal' }} />
     </ProductsStack.Navigator>
